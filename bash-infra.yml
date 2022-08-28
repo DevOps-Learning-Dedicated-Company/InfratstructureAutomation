@@ -13,3 +13,57 @@ steps:
     ScriptPath: './p-session-7/vnets.ps1'
     ScriptArguments: '-RGNAME automated-powershell-group -LOCATION ukwest -VNAME automated-powershell-vnet -ADDRESS 10.0.0.0/16 -SUBNETS subnet1,10.0.0.0/24,subnet2,10.0.1.0/24'
     azurePowerShellVersion: 'LatestVersion'
+
+- task: AzurePowerShell@5
+  displayName: Creating nsg
+  inputs:
+    azureSubscription: 'AzureResourceManager'
+    ScriptType: 'FilePath'
+    ScriptPath: './p-session-7/nsg.ps1'
+    ScriptArguments: '-RGNAME automated-powershell-group -LOCATION ukwest -NAME automated-nsg -RULES AllowAll,ALlow,*,Outbound,*,*,Internet,*,100'
+    azurePowerShellVersion: 'LatestVersion'
+
+- task: AzurePowerShell@5
+  displayName: Assigning nsg
+  inputs:
+    azureSubscription: 'AzureResourceManager'
+    ScriptType: 'FilePath'
+    ScriptPath: './p-session-7/assigningNSG.ps1'
+    ScriptArguments: '-RGNAME automated-powershell-group -VNAME automated-powershell-vnet -NSGNAME automated-nsg -SNAME subnet1'
+    azurePowerShellVersion: 'LatestVersion'
+
+- task: AzurePowerShell@5
+  displayName: Creating a VM
+  inputs:
+    azureSubscription: 'AzureResourceManager'
+    ScriptType: 'FilePath'
+    ScriptPath: './p-session-7/vm.ps1'
+    ScriptArguments: '-RGNAME automated-powershell-group -LOCATION ukwest -IMAGE UbuntuLTS -NAME auto-vm -VNETNAME automated-powershell-vnet -SNAME subnet1 -SIZE Standard_DS1_v2'
+    azurePowerShellVersion: 'LatestVersion'
+
+- task: AzurePowerShell@5
+  displayName: Creating an app service
+  inputs:
+    azureSubscription: 'AzureResourceManager'
+    ScriptType: 'FilePath'
+    ScriptPath: './session-8/appservice.ps1'
+    ScriptArguments: 'automated-powershell-group ukwest automated-app-service-plan 1 Standard mcr.microsoft.com/dotnet/samples:aspnetapp LinuxContainerApp'
+    azurePowerShellVersion: 'LatestVersion'
+
+- task: AzurePowerShell@5
+  displayName: Creating a storage account
+  inputs:
+    azureSubscription: 'AzureResourceManager'
+    ScriptType: 'FilePath'
+    ScriptPath: './session-9/storageaccount.ps1'
+    ScriptArguments: 'ukwest powershellstorage2137 Standard_LRS'
+    azurePowerShellVersion: 'LatestVersion'
+
+- task: AzurePowerShell@5
+  displayName: Creating a backup for the app service to storage acc
+  inputs:
+    azureSubscription: 'AzureResourceManager'
+    ScriptType: 'FilePath'
+    ScriptPath: './session-9/backup.ps1'
+    ScriptArguments: 'LinuxContainerApp powershellstorage2137 1 10'
+    azurePowerShellVersion: 'LatestVersion'
