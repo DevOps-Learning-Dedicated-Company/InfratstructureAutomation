@@ -1,0 +1,1 @@
+.\assigningNSG.ps1 -RGNAME automated-powershell-group -VNAME automated-powershell-vnet -NSGNAME automated-nsg -SNAME subnet1

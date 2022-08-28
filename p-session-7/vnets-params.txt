@@ -1,0 +1,1 @@
+.\vnets.ps1 -RGNAME automated-powershell-group -LOCATION ukwest -VNAME automated-powershell-vnet -ADDRESS 10.0.0.0/16 -SUBNETS subnet1,10.0.0.0/24,subnet2,10.0.1.0/24

@@ -1,0 +1,1 @@
+.\appservice.ps1 automated-powershell-group ukwest automated-app-service-plan 1 Standard mcr.microsoft.com/dotnet/samples:aspnetapp LinuxContainerApp

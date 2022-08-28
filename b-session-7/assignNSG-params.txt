@@ -1,0 +1,1 @@
+bash assigningNSG.sh -nn automated-bash-nsg -vn automated-bash-vnet -s subnet1

@@ -1,0 +1,2 @@
+.\vm.ps1 -RGNAME automated-powershell-group -LOCATION ukwest -IMAGE UbuntuLTS -NAME auto-vm -VNETNAME automated-powershell-vnet -SNAME subnet1 -SIZE Standard_DS1_v2
+.\vm.ps1 -RGNAME automated-powershell-group -LOCATION ukwest -IMAGE Win2019Datacenter -NAME auto-windows-vm -VNETNAME automated-powershell-vnet -SNAME subnet2 -SIZE Standard_DS1_v2

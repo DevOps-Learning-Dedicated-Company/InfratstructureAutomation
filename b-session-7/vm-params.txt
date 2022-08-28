@@ -1,0 +1,1 @@
+bash vm.sh -g automated-bash-group -vmn auto-vm-01 -i Canonical:UbuntuServer:18.04-LTS:latest -si Standard_DS1_v2 -st Standard_LRS -v automated-bash-vnet -su subnet1 -d somednsname -r reservedIP

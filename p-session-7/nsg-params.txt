@@ -1,0 +1,1 @@
+.\nsg.ps1 -RGNAME automated-powershell-group -LOCATION ukwest -NAME automated-nsg -RULES AllowAll,ALlow,*,Outbound,*,*,Internet,*,100

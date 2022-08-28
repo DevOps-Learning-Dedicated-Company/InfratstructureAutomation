@@ -1,0 +1,1 @@
+.\storageaccount.ps1 ukwest powershellstorage2137 Standard_LRS

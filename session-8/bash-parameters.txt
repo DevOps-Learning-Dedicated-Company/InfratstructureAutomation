@@ -1,0 +1,1 @@
+bash appservice.sh -g automated-bash-group -l ukwest -na automated-app-service-plan -n 1 -p F1 -i mcr.microsoft.com/dotnet/samples:aspnetapp -a LinuxContainerApp
