@@ -2,6 +2,12 @@
 echo "processing parameters to assign nsg"
 while [ "$1" != "" ]; do
     case $1 in
+        -g | --resource-group ) shift
+                                RGNAME=$1
+                                ;;
+        --resource-group-env )  shift
+                                RGNAME=${!1}
+                                ;;
         -nn | --nsg-name )      shift
                                 NSGNAME=$1
                                 ;;
@@ -24,6 +30,10 @@ while [ "$1" != "" ]; do
     shift
 done
 
+if [[ -z "${RGNAME}" ]]; then
+    RGNAME=automated-bash-group
+fi
+
 if [[ -z "${NSGNAME}" ]]; then
     NSGNAME=automated-bash-nsg
 fi
@@ -39,7 +49,5 @@ fi
 echo "using nsg name: "$NSGNAME
 echo "using vnet name: "$VNETNAME
 echo "using subnet name: "$SUBNETNAME
-
-RGNAME=build-agents-01-automated-bash
 
 az network vnet subnet update -g $RGNAME -n $SUBNETNAME --vnet-name $VNETNAME --network-security-group $NSGNAME
