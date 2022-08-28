@@ -65,5 +65,5 @@ steps:
     azureSubscription: 'AzureResourceManager'
     ScriptType: 'FilePath'
     ScriptPath: './session-9/backup.ps1'
-    ScriptArguments: 'LinuxContainerApp powershellstorage2137 1 10'
+    ScriptArguments: 'automated-powershell-group LinuxContainerApp powershellstorage2137 1 10'
     azurePowerShellVersion: 'LatestVersion'
