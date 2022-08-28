@@ -69,7 +69,7 @@ Invoke-Command `
         Write-Output "docker image: $IMAGE"
         Write-Output "name of the app: $APPNAME"
 
-        New-AzResourceGroup -Name $RGNAME -Location $LOCATION
+        #New-AzResourceGroup -Name $RGNAME -Location $LOCATION
 
         New-AzAppServicePlan -ResourceGroupName $RGNAME -Location $LOCATION -Name $PLANNAME -NumberofWorkers $NOW -Linux -Tier $PRICING
             
