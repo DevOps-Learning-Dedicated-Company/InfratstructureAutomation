@@ -34,7 +34,7 @@ jobs:
         with:
           inlineScript: |
                          chmod +x $GITHUB_WORKSPACE/b-session-7/assigningNSG.sh
-                         $GITHUB_WORKSPACE/b-session-7/assigningNSG.sh -nn automated-bash-nsg -vn automated-bash-vnet -s subnet1
+                         $GITHUB_WORKSPACE/b-session-7/assigningNSG.sh -g automated-bash-group -nn automated-bash-nsg -vn automated-bash-vnet -s subnet1
       - name: Creating a VM
         uses: Azure/cli@v1
         with:
