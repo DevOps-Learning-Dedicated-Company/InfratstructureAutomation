@@ -1,1 +1,1 @@
-bash storageaccount.sh -l ukwest -na automatedbashstorage -p F1
+bash storageaccount.sh -l ukwest -na automatedbashstorage -p Standard_LRS
