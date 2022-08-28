@@ -5,39 +5,11 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: AzureCLI@2
-  displayName: Creating a vnet
+- task: AzurePowerShell@5
+  displayName: Creating vnets
   inputs:
-    azureSubscription: 'Azure portal'
-    scriptType: 'bash'
-    scriptLocation: 'scriptPath'
-    scriptPath: './b-session-7/vnets.sh'
-    arguments: '-g automated-bash-group -l ukwest -n automated-bash-vnet -a 10.0.0.0/16 -s subnet1 10.0.0.0/24 subnet2 10.0.1.0/24'
-
-- task: AzureCLI@2
-  displayName: Create NSG
-  inputs:
-    azureSubscription: 'Azure portal'
-    scriptType: 'bash'
-    scriptLocation: 'scriptPath'
-    scriptPath: './b-session-7/nsg.sh'
-    arguments: '-l ukwest -n automated-bash-nsg -rn AllowAll -r Allow Outbount Tcp'
-
-- task: AzureCLI@2
-  displayName: Assign NSG
-  inputs:
-    azureSubscription: 'Azure portal'
-    scriptType: 'bash'
-    scriptLocation: 'scriptPath'
-    scriptPath: './b-session-7/assigns.sh'
-    arguments: '-nn automated-bash-nsg -vn automated-bash-vnet -s subnet1'
-    
-
-- task: AzureCLI@2
-  displayName: Create a VM
-  inputs:
-    azureSubscription: 'Azure portal'
-    scriptType: 'bash'
-    scriptLocation: 'scriptPath'
-    scriptPath: './b-session-7/vm.sh'
-    arguments: '-g automated-bash-group -vmn auto-vm-01 -i Canonical:UbuntuServer:18.04-LTS:latest -si Standard_DS1_v2 -st Standard_LRS -v automated-bash-vnet -su subnet1 -d somednsname -r reservedIP'
+    azureSubscription: 'AzureResourceManager'
+    ScriptType: 'FilePath'
+    ScriptPath: '.\p-session-7\vnets.ps1'
+    ScriptArguments: '-RGNAME automated-powershell-group -LOCATION ukwest -VNAME automated-powershell-vnet -ADDRESS 10.0.0.0/16 -SUBNETS subnet1,10.0.0.0/24,subnet2,10.0.1.0/24'
+    azurePowerShellVersion: 'LatestVersion'
