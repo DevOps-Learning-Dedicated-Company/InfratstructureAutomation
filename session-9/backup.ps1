@@ -1,6 +1,10 @@
 param (
     [Parameter(Mandatory = $true)]
     [string]
+    $RGNAME,
+
+    [Parameter(Mandatory = $true)]
+    [string]
     $SERVICE,
 
     [Parameter(Mandatory = $true)]
@@ -21,9 +25,13 @@ param (
 )
 
 Invoke-Command `
-    -ArgumentList $SERVICE, $STORAGE, $SCHEDULE, $RETENTION, $DATABASES `
+    -ArgumentList $RGNAME, $SERVICE, $STORAGE, $SCHEDULE, $RETENTION, $DATABASES `
     -ScriptBlock {
         param (
+            [Parameter(Mandatory = $true)]
+            [string]
+            $RGNAME,
+        
             [Parameter(Mandatory = $true)]
             [string]
             $SERVICE,
@@ -44,8 +52,6 @@ Invoke-Command `
             [string]
             $DATABASES
         )
-
-        $RGNAME = "automated-powershell-group"
         
         Write-Output "rgname: $RGNAME"
         Write-Output "app name: $SERVICE"
