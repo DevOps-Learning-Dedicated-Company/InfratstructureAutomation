@@ -8,32 +8,36 @@ steps:
 - task: AzureCLI@2
   displayName: Creating a vnet
   inputs:
-    azureSubscription: '26b3c258-f71f-4c14-b08e-32bff9b16b5a'
+    azureSubscription: 'Azure subscription 1(26b3c258-f71f-4c14-b08e-32bff9b16b5a)'
     scriptType: 'bash'
     scriptLocation: 'scriptPath'
     scriptPath: './b-session-7/vnets.sh'
     arguments: '-g automated-bash-group -l ukwest -n automated-bash-vnet -a 10.0.0.0/16 -s subnet1 10.0.0.0/24 subnet2 10.0.1.0/24'
 
-#- task: Bash@3
-#  displayName: Creating a vnet
-#  inputs:
-#    filePath: 'b-session-7/vnet.sh'
-#    arguments: '-g automated-bash-group -l ukwest -n automated-bash-vnet -a 10.0.0.0/16 -s subnet1 10.0.0.0/24 subnet2 10.0.1.0/24'
-
-- task: Bash@3
-  displayName: Creating NSG
+- task: AzureCLI@2
+  displayName: Create NSG
   inputs:
-    filePath: 'b-session-7/nsg.sh'
+    azureSubscription: 'Azure subscription 1(26b3c258-f71f-4c14-b08e-32bff9b16b5a)'
+    scriptType: 'bash'
+    scriptLocation: 'scriptPath'
+    scriptPath: './b-session-7/nsg.sh'
     arguments: '-l ukwest -n automated-bash-nsg -rn AllowAll -r Allow Outbount Tcp'
 
-- task: Bash@3
-  displayName: Assigning NSG
+- task: AzureCLI@2
+  displayName: Assign NSG
   inputs:
-    filePath: 'b-session-7/assigningNSG.sh'
+    azureSubscription: 'Azure subscription 1(c726bf38-5524-4f36-ae0c-e87f35b14d51)'
+    scriptType: 'bash'
+    scriptLocation: 'scriptPath'
+    scriptPath: './b-session-7/assigns.sh'
     arguments: '-nn automated-bash-nsg -vn automated-bash-vnet -s subnet1'
+    
 
-- task: Bash@3
-  displayName: Creating a VM
+- task: AzureCLI@2
+  displayName: Create a VM
   inputs:
-    filePath: 'b-session-7/vm.sh'
+    azureSubscription: 'Azure subscription 1(c726bf38-5524-4f36-ae0c-e87f35b14d51)'
+    scriptType: 'bash'
+    scriptLocation: 'scriptPath'
+    scriptPath: './b-session-7/vm.sh'
     arguments: '-g automated-bash-group -vmn auto-vm-01 -i Canonical:UbuntuServer:18.04-LTS:latest -si Standard_DS1_v2 -st Standard_LRS -v automated-bash-vnet -su subnet1 -d somednsname -r reservedIP'
