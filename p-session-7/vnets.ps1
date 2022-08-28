@@ -51,7 +51,7 @@ Invoke-Command `
         Write-Output "vnet address space: $ADDRESS"
         Write-Output "subnets: $SUBNETS"
 
-        New-AzResourceGroup -ResourceGroupName @RGNAME -Location @LOCATION
+        New-AzResourceGroup -ResourceGroupName $RGNAME -Location $LOCATION
 
         $VNET = New-AzVirtualNetwork -Name $VNAME -ResourceGroupName $RGNAME -Location $LOCATION -AddressPrefix $ADDRESS
 
