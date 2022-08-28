@@ -62,9 +62,6 @@ if [[ -z "${RETENTION}" ]]; then
     RETENTION=10
 fi
 
-if [[ -z "${DATABASES}" ]]; then
-fi
-
 BACKUPNAME=backupcontainer01
 EXPIRY=$(date -I -d "$(date) + 7 days")
 
