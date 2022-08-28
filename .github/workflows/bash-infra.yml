@@ -54,7 +54,7 @@ jobs:
         with:
           inlineScript: |
                          chmod +x $GITHUB_WORKSPACE/session-9/storageaccount.sh
-                         $GITHUB_WORKSPACE/session-9/storageaccount.sh -l ukwest -na automatedbashstorage -p F1
+                         $GITHUB_WORKSPACE/session-9/storageaccount.sh -l ukwest -na automatedbashstorage -p Standard_LRS
 
       - name: Creating a backup for the app service
         uses: Azure/cli@v1
