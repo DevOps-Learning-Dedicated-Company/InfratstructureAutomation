@@ -10,6 +10,6 @@ steps:
   inputs:
     azureSubscription: 'AzureResourceManager'
     ScriptType: 'FilePath'
-    ScriptPath: '.\p-session-7\vnets.ps1'
+    ScriptPath: './p-session-7/vnets.ps1'
     ScriptArguments: '-RGNAME automated-powershell-group -LOCATION ukwest -VNAME automated-powershell-vnet -ADDRESS 10.0.0.0/16 -SUBNETS subnet1,10.0.0.0/24,subnet2,10.0.1.0/24'
     azurePowerShellVersion: 'LatestVersion'
