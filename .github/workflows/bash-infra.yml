@@ -28,7 +28,7 @@ jobs:
         with:
           inlineScript: |
                          chmod +x $GITHUB_WORKSPACE/b-session-7/nsg.sh
-                         $GITHUB_WORKSPACE/b-session-7/nsg.sh -l ukwest -n automated-bash-nsg -rn AllowAll -r Allow Outbount Tcp
+                         $GITHUB_WORKSPACE/b-session-7/nsg.sh -l ukwest -n automated-bash-nsg -rn AllowAll -r Allow Outbound Tcp
       - name: Assigning nsg
         uses: Azure/cli@v1
         with:
@@ -41,3 +41,24 @@ jobs:
           inlineScript: |
                          chmod +x $GITHUB_WORKSPACE/b-session-7/vm.sh
                          $GITHUB_WORKSPACE/b-session-7/vm.sh -g automated-bash-group -vmn auto-vm-01 -i Canonical:UbuntuServer:18.04-LTS:latest -si Standard_DS1_v2 -st Standard_LRS -v automated-bash-vnet -su subnet1 -d somednsname -r reservedIP
+                         
+      - name: Creating app service
+        uses: Azure/cli@v1
+        with:
+          inlineScript: |
+                         chmod +x $GITHUB_WORKSPACE/session-8/appservice.sh
+                         $GITHUB_WORKSPACE/session-8/appservice.sh -g automated-bash-group -l ukwest -na automated-app-service-plan -n 1 -p F1 -i mcr.microsoft.com/dotnet/samples:aspnetapp -a LinuxContainerApp
+                         
+      - name: Creating a storage account
+        uses: Azure/cli@v1
+        with:
+          inlineScript: |
+                         chmod +x $GITHUB_WORKSPACE/session-9/storageaccount.sh
+                         $GITHUB_WORKSPACE/session-9/storageaccount.sh -l ukwest -na automatedbashstorage -p F1
+
+      - name: Creating a backup for the app service
+        uses: Azure/cli@v1
+        with:
+          inlineScript: |
+                         chmod +x $GITHUB_WORKSPACE/session-9/backup.sh
+                         $GITHUB_WORKSPACE/session-9/backup.sh -g automated-bash-group -a LinuxContainerApp --name automatedbashstorage -s 1d -r 10
