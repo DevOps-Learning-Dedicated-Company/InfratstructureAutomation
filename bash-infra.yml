@@ -5,11 +5,19 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: Bash@3
+- task: AzureCLI@2
   displayName: Creating a vnet
   inputs:
-    filePath: 'b-session-7/vnet.sh'
+    scriptType: 'bash'
+    scriptLocation: 'scriptPath'
+    scriptPath: './b-session-7/vnet.sh'
     arguments: '-g automated-bash-group -l ukwest -n automated-bash-vnet -a 10.0.0.0/16 -s subnet1 10.0.0.0/24 subnet2 10.0.1.0/24'
+
+#- task: Bash@3
+#  displayName: Creating a vnet
+#  inputs:
+#    filePath: 'b-session-7/vnet.sh'
+#    arguments: '-g automated-bash-group -l ukwest -n automated-bash-vnet -a 10.0.0.0/16 -s subnet1 10.0.0.0/24 subnet2 10.0.1.0/24'
 
 - task: Bash@3
   displayName: Creating NSG
