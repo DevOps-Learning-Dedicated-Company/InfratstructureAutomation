@@ -8,7 +8,7 @@ steps:
 - task: AzureCLI@2
   displayName: Creating a vnet
   inputs:
-    azureSubscription: 'Azure subscription 1(26b3c258-f71f-4c14-b08e-32bff9b16b5a)'
+    azureSubscription: 'Azure portal'
     scriptType: 'bash'
     scriptLocation: 'scriptPath'
     scriptPath: './b-session-7/vnets.sh'
@@ -17,7 +17,7 @@ steps:
 - task: AzureCLI@2
   displayName: Create NSG
   inputs:
-    azureSubscription: 'Azure subscription 1(26b3c258-f71f-4c14-b08e-32bff9b16b5a)'
+    azureSubscription: 'Azure portal'
     scriptType: 'bash'
     scriptLocation: 'scriptPath'
     scriptPath: './b-session-7/nsg.sh'
@@ -26,7 +26,7 @@ steps:
 - task: AzureCLI@2
   displayName: Assign NSG
   inputs:
-    azureSubscription: 'Azure subscription 1(c726bf38-5524-4f36-ae0c-e87f35b14d51)'
+    azureSubscription: 'Azure portal'
     scriptType: 'bash'
     scriptLocation: 'scriptPath'
     scriptPath: './b-session-7/assigns.sh'
@@ -36,7 +36,7 @@ steps:
 - task: AzureCLI@2
   displayName: Create a VM
   inputs:
-    azureSubscription: 'Azure subscription 1(c726bf38-5524-4f36-ae0c-e87f35b14d51)'
+    azureSubscription: 'Azure portal'
     scriptType: 'bash'
     scriptLocation: 'scriptPath'
     scriptPath: './b-session-7/vm.sh'
