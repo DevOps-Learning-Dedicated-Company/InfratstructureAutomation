@@ -84,7 +84,7 @@ echo "pricing tier: "$PRICING
 echo "docker hub image: "$IMAGE
 echo "app name: "$APPNAME
 
-az group create --name $RGNAME --location $LOCATION
+#az group create --name $RGNAME --location $LOCATION
 
 az appservice plan create\
     -g $RGNAME\
