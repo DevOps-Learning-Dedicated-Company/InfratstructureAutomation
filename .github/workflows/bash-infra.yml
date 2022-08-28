@@ -1,0 +1,43 @@
+name: CI
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+  
+permissions:
+      id-token: write
+      contents: read
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: acitons checkout
+        uses: actions/checkout@v1
+      - name: Creating vnet
+        uses: Azure/cli@v1
+        with:
+          inlineScript: |
+                         chmod +x $GITHUB_WORKSPACE/b-session-7/vnets.sh
+                         $GITHUB_WORKSPACE/b-session-7/vnets.sh -g automated-bash-group -l ukwest -n automated-bash-vnet -a 10.0.0.0/16 -s subnet1 10.0.0.0/24 subnet2 10.0.1.0/24
+      - name: Creating nsg
+        uses: Azure/cli@v1
+        with:
+          inlineScript: |
+                         chmod +x $GITHUB_WORKSPACE/b-session-7/nsg.sh
+                         $GITHUB_WORKSPACE/b-session-7/nsg.sh -l ukwest -n automated-bash-nsg -rn AllowAll -r Allow Outbount Tcp
+      - name: Assigning nsg
+        uses: Azure/cli@v1
+        with:
+          inlineScript: |
+                         chmod +x $GITHUB_WORKSPACE/b-session-7/assigningNSG.sh
+                         $GITHUB_WORKSPACE/b-session-7/assigningNSG.sh -nn automated-bash-nsg -vn automated-bash-vnet -s subnet1
+      - name: Creating a VM
+        uses: Azure/cli@v1
+        with:
+          inlineScript: |
+                         chmod +x $GITHUB_WORKSPACE/b-session-7/vm.sh
+                         $GITHUB_WORKSPACE/b-session-7/vm.sh -g automated-bash-group -vmn auto-vm-01 -i Canonical:UbuntuServer:18.04-LTS:latest -si Standard_DS1_v2 -st Standard_LRS -v automated-bash-vnet -su subnet1 -d somednsname -r reservedIP
