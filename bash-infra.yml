@@ -8,6 +8,7 @@ steps:
 - task: AzureCLI@2
   displayName: Creating a vnet
   inputs:
+    azureSubscription: 'Azure subscription 1(26b3c258-f71f-4c14-b08e-32bff9b16b5a)'
     scriptType: 'bash'
     scriptLocation: 'scriptPath'
     scriptPath: './b-session-7/vnets.sh'
