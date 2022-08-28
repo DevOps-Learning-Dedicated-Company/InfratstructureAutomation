@@ -36,7 +36,7 @@ Invoke-Command `
         Write-Output "storage account name: $STORAGE"
         Write-Output "pricing tier: $PRICING"
 
-        New-AzResourceGroup -Name $RGNAME -Location $LOCATION
+        #New-AzResourceGroup -Name $RGNAME -Location $LOCATION
 
         $STORAGE = New-AzStorageAccount -ResourceGroupName $RGNAME -Name $STORAGE -Location $LOCATION -SkuName $PRICING
     }
